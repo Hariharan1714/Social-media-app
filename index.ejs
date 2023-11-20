@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media App</title>
+</head>
+<body>
+  <h1>Social Media App</h1>
+
+  <form action="/add-post" method="post">
+    <label for="imageLink">Image Link:</label>
+    <input type="text" name="imageLink" required>
+    <br>
+    <label for="description">Description:</label>
+    <input type="text" name="description" required>
+    <br>
+    <button type="submit">Submit Post</button>
+  </form>
+
+  <hr>
+
+  <% posts.forEach((post, index) => { %>
+    <div>
+      <img src="<%= post.imageLink %>" alt="Post Image" style="max-width: 300px;">
+      <p><%= post.description %></p>
+      
+      <form action="/add-comment/<%= index %>" method="post">
+        <label for="comment">Comment:</label>
+        <input type="text" name="comment" required>
+        <button type="submit">Add Comment</button>
+      </form>
+      
+      <ul>
+        <% post.comments.forEach(comment => { %>
+          <li><%= comment %></li>
+        <% }); %>
+      </ul>
+    </div>
+    <hr>
+  <% }); %>
+</body>
+</html>
